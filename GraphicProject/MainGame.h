@@ -5,6 +5,7 @@
 
 #include "GLSLProgram.h"
 #include "Sprite.h"
+#include <vector>
 
 #include "GLTexture.h"
 
@@ -31,10 +32,10 @@ private:
 	int _screenHight;
 	GameState _gameState;
 
-	Sprite _sprite;
+	std::vector <Sprite*> _sprites;
 
 	GLSLProgram _colorProgram;
-	GLTexture _playerTexture;
+
 
 	float _time;
 

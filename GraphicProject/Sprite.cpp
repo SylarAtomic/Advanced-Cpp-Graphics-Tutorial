@@ -1,5 +1,6 @@
 #include "Sprite.h"
 #include "Vertex.h"
+#include "ResourceManager.h"
 
 #include <cstddef>
 
@@ -22,12 +23,14 @@ Sprite::~Sprite()
 
 //Initializes the sprite VBO. x, y, width, and height are
 //in the normalized device coordinate space. so, [-1, 1]
-void Sprite::init(float x, float y, float width, float height) {
+void Sprite::init(float x, float y, float width, float height, std::string texturePath) {
 	//Set up our private vars
 	_x = x;
 	_y = y;
 	_width = width;
 	_height = height;
+
+	_texture = ResourceManager::getTexture(texturePath);
 
 	//Generate the buffer if it hasn't already been generated
 	if (_vboID == 0) {
@@ -83,6 +86,8 @@ void Sprite::init(float x, float y, float width, float height) {
 
 //Draws the sprite to the screen
 void Sprite::draw() {
+
+	glBindTexture(GL_TEXTURE_2D, _texture.id);
 
 	//bind the buffer object
 	glBindBuffer(GL_ARRAY_BUFFER, _vboID);
