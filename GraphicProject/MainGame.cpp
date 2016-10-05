@@ -50,6 +50,10 @@ void MainGame::initSystems()
 {	//Initialize SDL
 	SDL_Init(SDL_INIT_EVERYTHING);
 
+	//Tell SDL that we want a double beffered window so we dont get any flickering
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+	//Open anm SDL window
 	_window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHight,SDL_WINDOW_OPENGL);
 	if (_window == nullptr) {
 		fatalError("SDL Window could not be created!");
@@ -60,14 +64,20 @@ void MainGame::initSystems()
 		fatalError("SDL_GL context could not be created!");
 	}
 
+	//Set up glew(optional but recommended)
 	GLenum error = glewInit();
 	if (error != GLEW_OK) {
 		fatalError("Could not initialize glue");
 	}
 
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	//Check the OpenGL version
+	std::printf("*** OpenGL Version: %s ***", glGetString(GL_VERSION));
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	//Set up the background color to blue
+	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+
+	//Set VSYNC
+	SDL_GL_SetSwapInterval(1);
 
 	initShaders();
 
