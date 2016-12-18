@@ -1,4 +1,5 @@
 #pragma once
 #include <string>
-
-extern void fatalError(std::string errorString);
+namespace Bengine {
+	extern void fatalError(std::string errorString);
+}
