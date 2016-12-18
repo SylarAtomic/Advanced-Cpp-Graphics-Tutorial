@@ -14,6 +14,8 @@
 
 #include <vector>
 
+#include <Bengine/Camera2D.h>
+
 
 enum class GameState { PLAY, EXIT };
 
@@ -42,6 +44,7 @@ private:
 	std::vector <Bengine::Sprite*> _sprites;
 
 	Bengine::GLSLProgram _colorProgram;
+	Bengine::Camera2D _camera;
 	
 	float _maxFPS;
 	float _fps;
