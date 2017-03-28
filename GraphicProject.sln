@@ -1,9 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26206.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphicProject", "GraphicProject\GraphicProject.vcxproj", "{E93DAB22-E30A-4161-9375-C068E67241C6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D3B08250-CC2D-4BF1-9943-486EA498C251} = {D3B08250-CC2D-4BF1-9943-486EA498C251}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bengine", "Bengine\Bengine.vcxproj", "{D3B08250-CC2D-4BF1-9943-486EA498C251}"
 EndProject
