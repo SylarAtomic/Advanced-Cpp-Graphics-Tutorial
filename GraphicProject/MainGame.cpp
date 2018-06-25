@@ -106,7 +106,7 @@ void MainGame::processInput()
 {
 	SDL_Event evnt;
 
-	const float CAMERA_SPEED = 20.0f;
+	const float CAMERA_SPEED = 2.0f;
 	const float SCALE_SPEED = 0.1f;
 
 	//Will keep looping there until there are no more events to process
@@ -119,32 +119,32 @@ void MainGame::processInput()
 				//std::cout << evnt.motion.x << " " << evnt.motion.y << std::endl;
 			break;
 			case SDL_KEYDOWN:
-				switch(evnt.key.keysym.sym)
-				{
-					//Get the input and use it to move the camera
-					//THIS IS TEMPORARY
-				case SDLK_w:
-					_camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, CAMERA_SPEED));
-					break;
-				case SDLK_s:
-					_camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, -CAMERA_SPEED));
-					break;
-				case SDLK_a:
-					_camera.setPosition(_camera.getPosition() + glm::vec2(-CAMERA_SPEED, 0.0f));
-					break;
-				case SDLK_d:
-					_camera.setPosition(_camera.getPosition() + glm::vec2(CAMERA_SPEED, 0.0f));
-					break;
-				case SDLK_q:
-					_camera.setScale(_camera.getScale() + SCALE_SPEED);
-					break;
-				case SDLK_e:
-					_camera.setScale(_camera.getScale() - SCALE_SPEED);
-					break;
-				}
+				_inputManager.pressKey(evnt.key.keysym.sym);
+				break;
+			case SDL_KEYUP:
+				_inputManager.releaseKey(evnt.key.keysym.sym);
 				break;
 		}
 	}
+	if (_inputManager.isKeyPressed(SDLK_w)) {
+		_camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, CAMERA_SPEED));
+	}
+	if (_inputManager.isKeyPressed(SDLK_s)) {
+		_camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, -CAMERA_SPEED));
+	}
+	if (_inputManager.isKeyPressed(SDLK_a)) {
+		_camera.setPosition(_camera.getPosition() + glm::vec2(-CAMERA_SPEED, 0.0f));
+	}
+	if (_inputManager.isKeyPressed(SDLK_d)) {
+		_camera.setPosition(_camera.getPosition() + glm::vec2(CAMERA_SPEED, 0.0f));
+	}
+	if (_inputManager.isKeyPressed(SDLK_q)) {
+		_camera.setScale(_camera.getScale() + SCALE_SPEED);
+	}
+	if (_inputManager.isKeyPressed(SDLK_e)) {
+		_camera.setScale(_camera.getScale() - SCALE_SPEED);
+	}
+
 }
 
 void MainGame::drawGame() {
@@ -186,11 +186,9 @@ void MainGame::drawGame() {
 	color.b = 255;
 	color.a = 255;
 
-	for (int i = 0; i < 1000; i++) {
-		_spriteBatch.draw(pos, uv, texture.id, 0.0f, color);
-		_spriteBatch.draw(pos + glm::vec4(50, 0, 0, 0), uv, texture.id, 0.0f, color);
-	}
-
+	_spriteBatch.draw(pos, uv, texture.id, 0.0f, color);
+	_spriteBatch.draw(pos + glm::vec4(50, 0, 0, 0), uv, texture.id, 0.0f, color);
+	
 	_spriteBatch.end();
 
 	_spriteBatch.renderBatch();

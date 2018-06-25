@@ -11,6 +11,7 @@
 
 #include <Bengine/Sprite.h>
 #include <Bengine/Window.h>
+#include <Bengine/InputManager.h>
 
 #include <Bengine/SpriteBatch.h>
 
@@ -47,6 +48,8 @@ private:
 	Bengine::Camera2D _camera;
 
 	Bengine::SpriteBatch _spriteBatch;
+
+	Bengine::InputManager _inputManager;
 	
 	float _maxFPS;
 	float _fps;
