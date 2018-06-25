@@ -1,5 +1,6 @@
 #include "MainGame.h"
 #include <Bengine/Errors.h>
+#include <Bengine/ResourceManager.h>
 
 #include <iostream>
 #include <string>
@@ -26,17 +27,17 @@ void MainGame::run()
 	initSystems();
 
 	//Initialize our sprite. (temporary)
-	_sprites.push_back(new Bengine::Sprite());
-	_sprites.back()->init(0.0f, 0.0f, _screenWidth/2, _screenWidth / 2, "Textures/jummyJump_pack/PNG/CharacterRight_Standing.png");
+	//_sprites.push_back(new Bengine::Sprite());
+	//_sprites.back()->init(0.0f, 0.0f, _screenWidth/2, _screenWidth / 2, "Textures/jummyJump_pack/PNG/CharacterRight_Standing.png");
 
-	_sprites.push_back(new Bengine::Sprite());
-	_sprites.back()->init(_screenWidth/2, 0.0f, _screenWidth/2, _screenWidth / 2, "Textures/jummyJump_pack/PNG/CharacterRight_Standing.png");
+	//_sprites.push_back(new Bengine::Sprite());
+	//_sprites.back()->init(_screenWidth/2, 0.0f, _screenWidth/2, _screenWidth / 2, "Textures/jummyJump_pack/PNG/CharacterRight_Standing.png");
 
-	for (int i = 0; i < 1000; i++)
+	/*for (int i = 0; i < 1000; i++)
 	{
 		_sprites.push_back(new Bengine::Sprite());
 		_sprites.back()->init(-1.0f, 0.0f, 1.0f, 1.0f, "Textures/jummyJump_pack/PNG/CharacterRight_Standing.png");
-	}
+	}*/
 	
 
 //	_playerTexture = ImageLoader::loadPNG("Textures/jummyJump_pack/PNG/CharacterRight_Standing.png");
@@ -52,6 +53,8 @@ void MainGame::initSystems()
 	_window.create("Game Engine", _screenWidth, _screenHeight, 0);
 
 	initShaders();
+
+	_spriteBatch.init();
 
 }
 
@@ -152,12 +155,17 @@ void MainGame::drawGame() {
 	//Clear the color and depth buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	//Enable the shader
 	_colorProgram.use();
-	glActiveTexture(GL_TEXTURE0);
 
+	//We are using texture unit 0
+	glActiveTexture(GL_TEXTURE0);
+	//Get the uniform location
 	GLint textureLocation = _colorProgram.getUniformLocation("mySampler");
+	//Tell the shader that the texture is in texture unit 0
 	glUniform1i(textureLocation, 0);
 
+	//Set the constantly changin time variable
 	GLint timeLocation = _colorProgram.getUniformLocation(("time"));
 	glUniform1f(timeLocation, _time);
 
@@ -167,13 +175,30 @@ void MainGame::drawGame() {
 
 	glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
 
-	//Draw our sprite!
-	for (int i = 0; i < _sprites.size(); i++)
-	{
-		_sprites[i]->draw();
+	_spriteBatch.begin();
+
+	glm::vec4 pos(0.0f, 0.0f, 50.0f, 50.0f);
+	glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
+	static Bengine::GLTexture texture = Bengine::ResourceManager::getTexture("Textures/jummyJump_pack/PNG/CharacterRight_Standing.png");
+	Bengine::Color color;
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
+	color.a = 255;
+
+	for (int i = 0; i < 1000; i++) {
+		_spriteBatch.draw(pos, uv, texture.id, 0.0f, color);
+		_spriteBatch.draw(pos + glm::vec4(50, 0, 0, 0), uv, texture.id, 0.0f, color);
 	}
 
+	_spriteBatch.end();
+
+	_spriteBatch.renderBatch();
+
+	//unbind the texture
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	//disable the shader
 	_colorProgram.unuse();
 	
 

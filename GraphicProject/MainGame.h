@@ -12,9 +12,11 @@
 #include <Bengine/Sprite.h>
 #include <Bengine/Window.h>
 
-#include <vector>
+#include <Bengine/SpriteBatch.h>
 
 #include <Bengine/Camera2D.h>
+
+#include <vector>
 
 
 enum class GameState { PLAY, EXIT };
@@ -41,10 +43,10 @@ private:
 	int _screenHeight;
 	GameState _gameState;
 
-	std::vector <Bengine::Sprite*> _sprites;
-
 	Bengine::GLSLProgram _colorProgram;
 	Bengine::Camera2D _camera;
+
+	Bengine::SpriteBatch _spriteBatch;
 	
 	float _maxFPS;
 	float _fps;
