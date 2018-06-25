@@ -158,10 +158,6 @@ void MainGame::drawGame() {
 	//Tell the shader that the texture is in texture unit 0
 	glUniform1i(textureLocation, 0);
 
-	//Set the constantly changin time variable
-	GLint timeLocation = _colorProgram.getUniformLocation(("time"));
-	glUniform1f(timeLocation, _time);
-
 	//Set the camera matrix
 	GLint pLocation = _colorProgram.getUniformLocation(("P"));
 	glm::mat4 cameraMatrix = _camera.getCameraMatrix();

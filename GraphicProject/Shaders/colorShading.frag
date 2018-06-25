@@ -10,7 +10,6 @@ in vec2 fragmentUV;
 //for each pixel.
 out vec4 color;
 
-uniform float time;
 uniform sampler2D mySampler;
 
 void main() {
@@ -19,7 +18,5 @@ void main() {
     vec4 textureColor = texture(mySampler, fragmentUV);
 
   //Make crazy colors using time and position!
-  color = vec4(fragmentColor.r * (cos(fragmentPosition.x * 4 + time) +1.0) * 0.5 ,
-               fragmentColor.g * (cos(fragmentPosition.y * 8 + time) +1.0) * 0.5 ,
-               fragmentColor.b * (cos(fragmentPosition.x * 2 + time) +1.0) * 0.5 , fragmentColor.a) * textureColor;
+  color = fragmentColor * textureColor;
 }
