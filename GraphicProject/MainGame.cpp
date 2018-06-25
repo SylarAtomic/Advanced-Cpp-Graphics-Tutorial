@@ -98,6 +98,7 @@ void MainGame::gameLoop()
 
 }
 
+//Process input with SDL
 void MainGame::processInput()
 {
 	SDL_Event evnt;
@@ -105,6 +106,7 @@ void MainGame::processInput()
 	const float CAMERA_SPEED = 20.0f;
 	const float SCALE_SPEED = 0.1f;
 
+	//Will keep looping there until there are no more events to process
 	while (SDL_PollEvent(&evnt)) {
 		switch (evnt.type) {
 			case SDL_QUIT:
@@ -116,6 +118,8 @@ void MainGame::processInput()
 			case SDL_KEYDOWN:
 				switch(evnt.key.keysym.sym)
 				{
+					//Get the input and use it to move the camera
+					//THIS IS TEMPORARY
 				case SDLK_w:
 					_camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, CAMERA_SPEED));
 					break;
@@ -123,10 +127,10 @@ void MainGame::processInput()
 					_camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, -CAMERA_SPEED));
 					break;
 				case SDLK_a:
-					_camera.setPosition(_camera.getPosition() + glm::vec2(CAMERA_SPEED, 0.0f));
+					_camera.setPosition(_camera.getPosition() + glm::vec2(-CAMERA_SPEED, 0.0f));
 					break;
 				case SDLK_d:
-					_camera.setPosition(_camera.getPosition() + glm::vec2(-CAMERA_SPEED, 0.0f));
+					_camera.setPosition(_camera.getPosition() + glm::vec2(CAMERA_SPEED, 0.0f));
 					break;
 				case SDLK_q:
 					_camera.setScale(_camera.getScale() + SCALE_SPEED);
