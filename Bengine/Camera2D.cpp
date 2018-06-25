@@ -25,8 +25,10 @@ namespace Bengine {
 		_orthoMatrix = glm::ortho(0.0f, (float)_screenWidth, 0.0f, (float)_screenHeight);
 	}
 
+	//updates the camera matrix if needed
 	void Camera2D::update()
 	{
+		//Only update if our position or scale have changed
 		if (_needsMatrixUpdate)
 		{
 			//Camera Translation
@@ -39,5 +41,16 @@ namespace Bengine {
 			_needsMatrixUpdate = false;
 		}
 
+	}
+
+	glm::vec2 Camera2D::converScreenToWorld(glm::vec2 screenCoords) {
+		//Make it so that 0 is the center
+		screenCoords -= glm::vec2(_screenWidth / 2, _screenHeight / 2);
+		// Scale the coordinates
+		screenCoords /= _scale;
+		//Transalte with the camera position
+		screenCoords +=_position;
+
+		return screenCoords;
 	}
 }
