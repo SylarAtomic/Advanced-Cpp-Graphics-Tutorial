@@ -12,6 +12,7 @@
 #include <Bengine/Sprite.h>
 #include <Bengine/Window.h>
 #include <Bengine/InputManager.h>
+#include <Bengine/Timing.h>
 
 #include <Bengine/SpriteBatch.h>
 
@@ -37,7 +38,6 @@ private:
 	void gameLoop();
 	void processInput();
 	void drawGame();
-	void calculateFPS();
 
 	Bengine::Window _window;
 	int _screenWidth;
@@ -50,11 +50,10 @@ private:
 	Bengine::SpriteBatch _spriteBatch;
 
 	Bengine::InputManager _inputManager;
-	
+	Bengine::FpsLimiter _fpsLimiter;
+
 	float _maxFPS;
 	float _fps;
-	float _frameTime;
-
 	float _time;
 
 };
