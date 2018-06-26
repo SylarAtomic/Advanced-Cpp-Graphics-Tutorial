@@ -37,16 +37,23 @@ void MainGame::initSystems() {
 
 	initShaders();
 
-	_levels.push_back(new Level("Levels/level1.text"));
+	_levels.push_back(new Level("Levels/level1.txt"));
 }
 
 void MainGame::initShaders() {
     // Compile our color shader
-	_textureProgram.compilerShaders("Resources/Shaders/vertexShader.vs", "Resources/Shaders/fragmentShader.fs");
+	_textureProgram.compilerShaders("Shaders/textureShading.vert", "Shaders/textureShading.frag");
 	_textureProgram.addAttribute("vertexPosition");
 	_textureProgram.addAttribute("vertexColor");
 	_textureProgram.addAttribute("vertexUV");
 	_textureProgram.linkShaders();
+
+
+	/*_colorProgram.compilerShaders("Shaders/colorShading.vert", "Shaders/colorShading.frag");
+	_colorProgram.addAttribute("vertexPosition");
+	_colorProgram.addAttribute("vertexColor");
+	_colorProgram.addAttribute("vertexUV");
+	_colorProgram.linkShaders();*/
 }
 
 void MainGame::gameLoop() {

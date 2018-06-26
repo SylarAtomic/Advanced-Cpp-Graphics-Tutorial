@@ -63,6 +63,7 @@ namespace Bengine {
 
 			//We don't need the program anymore.
 			glDeleteProgram(_programID);
+
 			//Don't leak shaders either.
 			glDeleteShader(_vertexShaderID);
 			glDeleteShader(_fragmentShaderID);
