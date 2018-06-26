@@ -44,6 +44,8 @@ namespace Bengine {
 	}
 
 	glm::vec2 Camera2D::converScreenToWorld(glm::vec2 screenCoords) {
+		//Invert Y direction
+		screenCoords.y = _screenHeight - screenCoords.y;
 		//Make it so that 0 is the center
 		screenCoords -= glm::vec2(_screenWidth / 2, _screenHeight / 2);
 		// Scale the coordinates

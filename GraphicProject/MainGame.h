@@ -18,6 +18,8 @@
 
 #include <Bengine/Camera2D.h>
 
+#include "Bullet.h"
+
 #include <vector>
 
 
@@ -51,6 +53,8 @@ private:
 
 	Bengine::InputManager _inputManager;
 	Bengine::FpsLimiter _fpsLimiter;
+
+	std::vector<Bullet> _bullets;
 
 	float _maxFPS;
 	float _fps;
