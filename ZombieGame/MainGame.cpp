@@ -1,26 +1,43 @@
 #include "MainGame.h"
+#include <Bengine/Bengine.h>
 #include <Include/SDL/SDL.h>
 #include <iostream>
+#include <Bengine/Timing.h>
 
 
-MainGame::MainGame(){
-    // Empty
+MainGame::MainGame():	_screenWidth(1024),
+						_screenHeight(798),
+						_gameState(GameState::PLAY),
+						_fps(0)
+{
+
 }
 
 MainGame::~MainGame() 
 {
-	// Empty
+	for (int i = 0; i < _levels.size(); i++) {
+		{
+			delete _levels[i];
+		}
+	}
 }
 
 void MainGame::run() {
-	_levels.push_back(new Level("Levels/level1.txt"));
 
-	int a;
-	std::cin >> a;
+	initSystems();
+
+	gameLoop();
+
 }
 
 void MainGame::initSystems() {
-	// Empty
+	Bengine::init();
+
+	_window.create("ZombieGame", _screenWidth, _screenHeight, 0);
+
+	initShaders();
+
+	_levels.push_back(new Level("Levels/level1.text"));
 }
 
 void MainGame::initShaders() {
@@ -33,7 +50,19 @@ void MainGame::initShaders() {
 }
 
 void MainGame::gameLoop() {
-	// Empty
+	
+	Bengine::FpsLimiter fpsLimiter;
+	fpsLimiter.setMaxFPS(60.0f);
+
+	while (_gameState == GameState::PLAY) {
+		fpsLimiter.begin();
+
+		processInput();
+
+		drawGame();
+
+		_fps = fpsLimiter.end();
+	}
 }
 
 void MainGame::processInput() {

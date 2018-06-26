@@ -7,6 +7,11 @@
 
 #include "Level.h"
 
+enum class GameState {
+	PLAY,
+	EXIT
+};
+
 
 class MainGame
 {
@@ -38,5 +43,11 @@ private:
     Bengine::Camera2D _camera; ///< Main Camera
 
 	std::vector<Level*> _levels; // Vector of all levels
+
+	int _screenWidth, _screenHeight;
+
+	int _fps;
+
+	GameState _gameState;
 };
 
