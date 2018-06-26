@@ -1,5 +1,6 @@
 #include "MainGame.h"
 #include <Include/SDL/SDL.h>
+#include <iostream>
 
 
 MainGame::MainGame(){
@@ -12,7 +13,10 @@ MainGame::~MainGame()
 }
 
 void MainGame::run() {
-	// Empty
+	_levels.push_back(new Level("Levels/level1.txt"));
+
+	int a;
+	std::cin >> a;
 }
 
 void MainGame::initSystems() {

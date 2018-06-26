@@ -5,6 +5,8 @@
 #include <Bengine\Camera2D.h>
 #include <Bengine\InputManager.h>
 
+#include "Level.h"
+
 
 class MainGame
 {
@@ -34,5 +36,7 @@ private:
 	Bengine::GLSLProgram _textureProgram; ///< The shader program
 	Bengine::InputManager _inputManager; ///< Handles input
     Bengine::Camera2D _camera; ///< Main Camera
+
+	std::vector<Level*> _levels; // Vector of all levels
 };
 
