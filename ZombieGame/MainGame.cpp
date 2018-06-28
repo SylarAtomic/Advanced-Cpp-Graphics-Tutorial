@@ -37,7 +37,11 @@ void MainGame::initSystems() {
 
 	initShaders();
 
+	_camera.init(_screenHeight, _screenHeight);
+
+	// Level 1
 	_levels.push_back(new Level("Levels/level1.txt"));
+	_currentLevel = 0;
 }
 
 void MainGame::initShaders() {
@@ -65,6 +69,8 @@ void MainGame::gameLoop() {
 		fpsLimiter.begin();
 
 		processInput();
+		_camera.update();
+
 
 		drawGame();
 
@@ -108,8 +114,29 @@ void MainGame::drawGame() {
     // Clear the color and depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	_textureProgram.use();
+
 	//Draw code goes here
+	glActiveTexture(GL_TEXTURE0);
+
+	// Make sure the shader uses texture 0
+
+	GLint textureUniform = _textureProgram.getUniformLocation("mySampler");
+	glUniform1i(textureUniform, 0);
+
+
+	// Grab the camera matrix
+	glm::mat4 projectionMatrix = _camera.getCameraMatrix();
+	GLint pUniform = _textureProgram.getUniformLocation("P");
+	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
+
+	// Draw the level
+	_levels[_currentLevel]->draw();
+
+	_textureProgram.unuse();
 
 	//Swap our buffer and draw everything to the screen!
 	_window.swapBuffer();
+
+	//_textureProgram.linkShaders();
 }
