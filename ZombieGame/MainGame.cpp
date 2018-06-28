@@ -8,7 +8,8 @@
 MainGame::MainGame():	_screenWidth(1024),
 						_screenHeight(798),
 						_gameState(GameState::PLAY),
-						_fps(0)
+						_fps(0),
+						_player(nullptr)
 {
 
 }
@@ -26,6 +27,8 @@ void MainGame::run() {
 
 	initSystems();
 
+	initLevel();
+
 	gameLoop();
 
 }
@@ -34,15 +37,29 @@ void MainGame::initSystems() {
 	Bengine::init();
 
 	_window.create("ZombieGame", _screenWidth, _screenHeight, 0);
+	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
 
 	initShaders();
 
+	_agentSpriteBatch.init();
+
 	_camera.init(_screenHeight, _screenHeight);
 
+
+}
+
+void MainGame::initLevel()
+{
 	// Level 1
 	_levels.push_back(new Level("Levels/level1.txt"));
 	_currentLevel = 0;
+
+	_player = new Player();
+	_player->init(1.0f, _levels[_currentLevel]->getStartPlayerPos());
+
+	_humans.push_back(_player);
 }
+
 
 void MainGame::initShaders() {
     // Compile our color shader
@@ -81,11 +98,11 @@ void MainGame::gameLoop() {
 void MainGame::processInput() {
     SDL_Event evnt;
 
-    //Will keep looping until there are no more events to process
+    // Will keep looping until there are no more events to process
     while (SDL_PollEvent(&evnt)) {
         switch (evnt.type) {
             case SDL_QUIT:
-                //Exit the game here!
+                // Exit the game here!
                 break;
             case SDL_MOUSEMOTION:
                 _inputManager.setMouseCoords(evnt.motion.x, evnt.motion.y);
@@ -116,7 +133,7 @@ void MainGame::drawGame() {
 
 	_textureProgram.use();
 
-	//Draw code goes here
+	// Draw code goes here
 	glActiveTexture(GL_TEXTURE0);
 
 	// Make sure the shader uses texture 0
@@ -133,9 +150,21 @@ void MainGame::drawGame() {
 	// Draw the level
 	_levels[_currentLevel]->draw();
 
+	// Begin drawing agents
+	_agentSpriteBatch.begin();
+
+	//Draw the humans
+	for (int i = 0; i < _humans.size(); i++) {
+		_humans[i]->draw(;)
+	}
+	
+	_agentSpriteBatch.end();
+
+	_agentSpriteBatch.renderBatch();
+
 	_textureProgram.unuse();
 
-	//Swap our buffer and draw everything to the screen!
+	// Swap our buffer and draw everything to the screen!
 	_window.swapBuffer();
 
 	//_textureProgram.linkShaders();
