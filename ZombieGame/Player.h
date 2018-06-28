@@ -9,9 +9,12 @@ public:
 	Player();
 	~Player();
 
-	void init(int speed, glm::vec2 pos);
+	void init(int speed, glm::vec2 pos, Bengine::InputManager* inputManager);
 
-	void update(Bengine::InputManager& inputManager);
+	void update();
+
+private:
+	Bengine::InputManager* _inputManager;
 
 };
 

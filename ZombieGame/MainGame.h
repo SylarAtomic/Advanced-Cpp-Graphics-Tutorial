@@ -34,6 +34,9 @@ private:
     /// Initializes the shaders
     void initShaders();
 
+	/// Upadates all agents
+	void updateAgents();
+
     /// Main game loop for the program
     void gameLoop();
     /// Handles input processing

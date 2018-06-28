@@ -55,7 +55,7 @@ void MainGame::initLevel()
 	_currentLevel = 0;
 
 	_player = new Player();
-	_player->init(1.0f, _levels[_currentLevel]->getStartPlayerPos());
+	_player->init(1.0f, _levels[_currentLevel]->getStartPlayerPos(), &_inputManager);
 
 	_humans.push_back(_player);
 }
@@ -77,6 +77,15 @@ void MainGame::initShaders() {
 	_colorProgram.linkShaders();*/
 }
 
+void MainGame::updateAgents(){
+	// Update all humans
+	for (int i = 0; i < _humans.size(); i++) {
+		_humans[i]->update();
+	}
+
+	// Don't forget to update zombies
+}
+
 void MainGame::gameLoop() {
 	
 	Bengine::FpsLimiter fpsLimiter;
@@ -87,7 +96,7 @@ void MainGame::gameLoop() {
 
 		processInput();
 		_camera.update();
-
+		_player->update();
 
 		drawGame();
 
@@ -155,7 +164,7 @@ void MainGame::drawGame() {
 
 	//Draw the humans
 	for (int i = 0; i < _humans.size(); i++) {
-		_humans[i]->draw(;)
+		_humans[i]->draw(_agentSpriteBatch);
 	}
 	
 	_agentSpriteBatch.end();

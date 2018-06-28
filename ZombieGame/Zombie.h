@@ -7,5 +7,7 @@ class Zombie : public Agent
 public:
 	Zombie();
 	~Zombie();
+
+	virtual void update();
 };
 

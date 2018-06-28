@@ -11,6 +11,8 @@ public:
 	Agent();
 	virtual ~Agent();
 
+	virtual void update() = 0;
+
 	void draw(Bengine::SpriteBatch& _spriteBatch);
 
 protected:
