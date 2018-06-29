@@ -1,5 +1,6 @@
 #include "Agent.h"
 #include <Bengine/ResourceManager.h>
+#include "Level.h"
 
 
 Agent::Agent()
@@ -9,6 +10,15 @@ Agent::Agent()
 
 Agent::~Agent()
 {
+}
+
+void Agent::collideWithLevel(const std::vector<std::string>& levelData){
+	
+	std::vector<glm::vec2> collideTilePosition;
+
+	// Check the four corners
+	glm::vec2 cornerPos = _position;
+
 }
 
 void Agent::draw(Bengine::SpriteBatch & _spriteBatch){

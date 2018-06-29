@@ -5,13 +5,21 @@
 
 const float AGENT_WIDTH = 60;
 
+class Zombie;
+class Human;
+
 class Agent
 {
 public:
 	Agent();
 	virtual ~Agent();
 
-	virtual void update() = 0;
+	virtual void update(const std::vector<std::string>& levelData,
+						std::vector<Human*>& humans,
+						std::vector<Zombie*>& zombies) = 0;
+
+	void collideWithLevel(const std::vector<std::string>& levelData);
+
 
 	void draw(Bengine::SpriteBatch& _spriteBatch);
 
