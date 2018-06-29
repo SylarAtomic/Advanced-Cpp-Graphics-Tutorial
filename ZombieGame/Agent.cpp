@@ -20,7 +20,7 @@ void Agent::draw(Bengine::SpriteBatch & _spriteBatch){
 	glm::vec4 destRect;
 	destRect.x = _position.x;
 	destRect.y = _position.y;
-	destRect.y = AGENT_WIDTH;
+	destRect.z = AGENT_WIDTH;
 	destRect.w = AGENT_WIDTH;
 
 	_spriteBatch.draw(destRect, uvRect, textureID, 0.0f, _color);

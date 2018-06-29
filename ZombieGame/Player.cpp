@@ -24,16 +24,16 @@ void Player::init(float speed, glm::vec2 pos, Bengine::InputManager* inputManage
 
 void Player::update(){
 	if (_inputManager->isKeyPressed(SDLK_w)) {
-		_position.x += _speed;
+		_position.y += _speed;
 	}
 	else if (_inputManager->isKeyPressed(SDLK_s)) {
-		_position.x -= _speed;
-	}
-	if (_inputManager->isKeyPressed(SDLK_a)) {
 		_position.y -= _speed;
 	}
+	if (_inputManager->isKeyPressed(SDLK_a)) {
+		_position.x -= _speed;
+	}
 	else if (_inputManager->isKeyPressed(SDLK_d)) {
-		_position.y += _speed;
+		_position.x += _speed;
 	}
 // May need to change inputManager to _inputManager or back?
 }
