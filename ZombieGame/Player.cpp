@@ -11,7 +11,7 @@ Player::~Player()
 {
 }
 
-void Player::init(int speed, glm::vec2 pos, Bengine::InputManager* inputManager)
+void Player::init(float speed, glm::vec2 pos, Bengine::InputManager* inputManager)
 {
 	_speed = speed;
 	_position = pos;

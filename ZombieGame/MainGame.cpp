@@ -55,7 +55,7 @@ void MainGame::initLevel()
 	_currentLevel = 0;
 
 	_player = new Player();
-	_player->init(1.0f, _levels[_currentLevel]->getStartPlayerPos(), &_inputManager);
+	_player->init(4.0f, _levels[_currentLevel]->getStartPlayerPos(), &_inputManager);
 
 	_humans.push_back(_player);
 }
@@ -95,8 +95,14 @@ void MainGame::gameLoop() {
 		fpsLimiter.begin();
 
 		processInput();
+
+		updateAgents();
+		
+		_camera.setPosition(_player->getPosition());
+
 		_camera.update();
-		_player->update();
+		
+		//_player->update();
 
 		drawGame();
 
@@ -129,9 +135,7 @@ void MainGame::processInput() {
 				_inputManager.releaseKey(evnt.button.button);
                 break;
         }
-    
 	}
-
 }
 
 void MainGame::drawGame() {

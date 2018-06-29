@@ -57,7 +57,7 @@ private:
 
 	int _screenWidth, _screenHeight;
 
-	int _fps;
+	float _fps;
 
 	int _currentLevel;
 

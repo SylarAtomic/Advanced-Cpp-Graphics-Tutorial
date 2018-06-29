@@ -15,6 +15,8 @@ public:
 
 	void draw(Bengine::SpriteBatch& _spriteBatch);
 
+	glm::vec2 getPosition() const { return _position; }
+
 protected:
 	glm::vec2 _position;
 	Bengine::Color _color;

@@ -9,7 +9,7 @@ public:
 	Player();
 	~Player();
 
-	void init(int speed, glm::vec2 pos, Bengine::InputManager* inputManager);
+	void init(float speed, glm::vec2 pos, Bengine::InputManager* inputManager);
 
 	void update();
 
