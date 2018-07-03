@@ -68,7 +68,7 @@ void Agent::checkTilePosition(	const std::vector<std::string>& levelData,
 	glm::vec2 cornerPos = glm::vec2(floor(x / (float)TILE_WIDTH),
 									floor(y / (float)TILE_WIDTH));
 
-	if (levelData[cornerPos.y][cornerPos.y] != '.') {
+	if (levelData[cornerPos.y][cornerPos.x] != '.') {
 		collideTilePosition.push_back(cornerPos  * (float)TILE_WIDTH + glm::vec2((float)TILE_WIDTH/2.0f));
 	}
 
