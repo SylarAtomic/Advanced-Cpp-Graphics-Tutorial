@@ -39,4 +39,6 @@ void Player::update(const std::vector<std::string>& levelData,
 		_position.x += _speed;
 	}
 // May need to change inputManager to _inputManager or back?
+
+	collideWithLevel(levelData);
 }

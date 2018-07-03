@@ -26,6 +26,14 @@ public:
 	glm::vec2 getPosition() const { return _position; }
 
 protected:
+
+	void checkTilePosition(const std::vector<std::string>& levelData,
+							std::vector<glm::vec2>& collideTilePosition,
+							float x,
+							float y);
+
+	void collideWithTile(glm::vec2 tilePos);
+
 	glm::vec2 _position;
 	Bengine::Color _color;
 	float _speed;

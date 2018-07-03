@@ -18,6 +18,7 @@ public:
 	void draw();
 
 	// Getters
+	const std::vector<std::string>& getLevelData() const { return _levelData;  }
 	glm::vec2 getStartPlayerPos() const { return _startPlayerPos; }
 	const std::vector<glm::vec2>& getZombieStartPlayerPos() const { return _zombieStartPositions; } // Error Here
 

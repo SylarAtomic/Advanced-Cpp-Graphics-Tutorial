@@ -1,8 +1,12 @@
 #include "MainGame.h"
+
 #include <Bengine/Bengine.h>
+#include <Bengine/Timing.h>
+
 #include <Include/SDL/SDL.h>
 #include <iostream>
-#include <Bengine/Timing.h>
+
+#include "Zombie.h"
 
 
 MainGame::MainGame():	_screenWidth(1024),
@@ -80,7 +84,9 @@ void MainGame::initShaders() {
 void MainGame::updateAgents(){
 	// Update all humans
 	for (int i = 0; i < _humans.size(); i++) {
-		_humans[i]->update();
+		_humans[i]->update(_levels[_currentLevel]->getLevelData(),
+							_humans,
+							_zombies);
 	}
 
 	// Don't forget to update zombies
